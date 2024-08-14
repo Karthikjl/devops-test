@@ -6,7 +6,7 @@ trigger:
       - master
 
 pool:
-  vmImage: 'ubuntu-latest'  # Using a Microsoft-hosted agent with Ubuntu
+  name: Self
 
 variables:
   MAVEN_OPTS: '-Xmx1024m'
@@ -18,12 +18,9 @@ stages:
       - job: Build
         displayName: 'Build and Test Job'
         steps:
-          - task: UseMaven@4
-            inputs:
-              mavenVersionOption: 'Default'
-              mavenPomFile: 'pom.xml'
-              goals: 'clean install'
-              options: '--batch-mode'
+          - script: |
+              mvn clean install --batch-mode
+            displayName: 'Build with Maven'
 
           - task: PublishTestResults@2
             inputs:
