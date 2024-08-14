@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-    Self
+    name: Self
 
 steps:
 - task: Maven@3
